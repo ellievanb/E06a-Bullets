@@ -58,8 +58,8 @@ class eBullet(arcade.Sprite):
         '''
         Moves the bullet
         '''
-        self.center_x += self.dx
-        self.center_y += self.dy
+        self.center_x -= self.dx
+        self.center_y -= self.dy
 
 
     
@@ -117,6 +117,7 @@ class Window(arcade.Window):
                 if e.hp <= 0:
                     e.kill()
                     self.score += KILL_SCORE
+
             # check for collision
             # for every bullet that hits, decrease the hp and then see if it dies
             # increase the score
@@ -144,7 +145,11 @@ class Window(arcade.Window):
             y = self.player.center_y
             bullet = Bullet((x,y),(0,10), BULLET_DAMAGE)
             self.bullet_list.append(bullet)
-            
+
+            x = self.player.center_x
+            y = self.player.center_y
+            bullet = eBullet((x,y),(0,10), BULLET_DAMAGE)
+            self.bullet_list.append(bullet)
 
 def main():
     window = Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
